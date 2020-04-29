@@ -1,0 +1,14 @@
+name: Test
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: fabasoad/setup-mint-action@v1.0.0
+        with:
+          version: '0.9.0'
+      - run: mint install
+      - run: mint test
