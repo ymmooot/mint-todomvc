@@ -1,0 +1,9 @@
+{
+  "name": "my-app",
+  "source-directories": [
+    "source"
+  ],
+  "test-directories": [
+    "tests"
+  ]
+} 
