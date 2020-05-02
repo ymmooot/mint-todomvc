@@ -1,4 +1,4 @@
-module EArray {
+module Array.Extra {
   /*
   Returns `true` if all item in the array matches the predicate function
   `false` otherwise.

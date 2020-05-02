@@ -154,7 +154,7 @@ store Todos {
   } where {
     areAllCompleted =
       todos
-      |> EArray.all((todo : TodoItem) : Bool { todo.completed })
+      |> Array.Extra.all((todo : TodoItem) : Bool { todo.completed })
 
     updatedtodos =
       todos
