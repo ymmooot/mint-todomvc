@@ -5,5 +5,8 @@
   ],
   "test-directories": [
     "tests"
-  ]
+  ],
+  "application": {
+    "head": "assets/head.html"
+  }
 } 
