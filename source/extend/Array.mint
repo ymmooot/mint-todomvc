@@ -13,22 +13,4 @@ module Array.Extra {
         !(func(item))
       })))
   }
-
-  /*
-  Returns joined string
-
-    Array.Extra.join(",", ["a", "b", "c"]) == "a,b,c"
-  */
-  fun join (glue : String, ary : Array(String)) : String {
-    ary
-    |> Array.reduce(
-      "",
-      (memo : String, item : String) : String {
-        case (memo) {
-          "" => item
-
-          => "#{memo}#{glue}#{item}"
-        }
-      })
-  }
 }

@@ -114,7 +114,7 @@ store Todos {
 
       next { todos = decodedtodos }
     } catch {
-      Promise.never()
+      next {  }
     }
   }
 
@@ -128,9 +128,9 @@ store Todos {
 
       Storage.Local.set(LOCAL_STORAGE_KEY, json)
 
-      Promise.never()
+      next {  }
     } catch Storage.Error => error {
-      Promise.never()
+      next {  }
     }
   }
 
