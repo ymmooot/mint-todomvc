@@ -14,3 +14,15 @@ suite "Array.Extra.all" {
     |> Array.Extra.all((number : Number) : Bool { number % 2 == 0 })
   }
 }
+
+suite "Array.Extra.join" {
+  test "returns joined string" {
+    (["a", "b", "c"]
+    |> Array.Extra.join(",")) == "a,b,c"
+  }
+
+  test "returns an empty string if array length is 0" {
+    ([]
+    |> Array.Extra.join(",")) == ""
+  }
+}

@@ -35,7 +35,7 @@ component Footer {
   fun filterSelected (e : Html.Event) : Promise(Never, void) {
     `#{e.target}.innerText`
     |> VisibilityFilterModule.fromString()
-    |> Result.withDefault(VisibilityFilterEnum::ShowAll)
+    |> Maybe.withDefault(VisibilityFilterEnum::ShowAll)
     |> setVisibilityFilter()
   }
 

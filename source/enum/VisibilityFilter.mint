@@ -13,12 +13,12 @@ module VisibilityFilterModule {
     }
   }
 
-  fun fromString (item : String) : Result(error, VisibilityFilterEnum) {
+  fun fromString (item : String) : Maybe(VisibilityFilterEnum) {
     case (item) {
-      "All" => Result.ok(VisibilityFilterEnum::ShowAll)
-      "Active" => Result.ok(VisibilityFilterEnum::ShowActive)
-      "Completed" => Result.ok(VisibilityFilterEnum::ShowCompleted)
-      => Result.error("error")
+      "All" => Maybe.just(VisibilityFilterEnum::ShowAll)
+      "Active" => Maybe.just(VisibilityFilterEnum::ShowActive)
+      "Completed" => Maybe.just(VisibilityFilterEnum::ShowCompleted)
+      => Maybe.nothing()
     }
   }
 }

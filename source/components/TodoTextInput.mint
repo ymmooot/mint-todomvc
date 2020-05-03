@@ -14,16 +14,23 @@ component TodoTextInput {
   }
 
   get classes : String {
-    `
-      Object.entries({
-        'todo-text-input': true,
-        'new-todo': #{isNewItem},
-        edit: !#{isNewItem},
+    Map.empty()
+    |> Map.set("new-todo", isNewItem)
+    |> Map.set("edit", !isNewItem)
+    |> Map.Extra.entries()
+    |> Array.select(
+      (t : Tuple(String, Bool)) : Bool {
+        case (t) {
+          {k, v} => v
+        }
       })
-      .filter(([k, v]) => v)
-      .map(([k]) => k)
-      .join(" ")
-    `
+    |> Array.map(
+      (t : Tuple(String, Bool)) : String {
+        case (t) {
+          {k} => k
+        }
+      })
+    |> Array.Extra.join(" ")
   }
 
   fun handleInput (event : Html.Event) : Promise(Never, Void) {
