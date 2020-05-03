@@ -6,3 +6,9 @@ component Main {
     </div>
   }
 }
+
+routes {
+  * {
+    Todos.load()
+  }
+}

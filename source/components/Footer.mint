@@ -27,18 +27,6 @@ component Footer {
     }
   }
 
-  get filterTitles : Array(String) {
-    FILTER_TITLES
-    |> Array.map(VisibilityFilterModule.toString)
-  }
-
-  fun filterSelected (e : Html.Event) : Promise(Never, void) {
-    `#{e.target}.innerText`
-    |> VisibilityFilterModule.fromString()
-    |> Maybe.withDefault(VisibilityFilterEnum::ShowAll)
-    |> setVisibilityFilter()
-  }
-
   fun render : Html {
     <footer class="footer">
       <span class="todo-count">
@@ -52,24 +40,20 @@ component Footer {
       </span>
 
       <ul class="filters">
-        <{
-          Array.map(
-            (filter : String) : Html {
-              <li>
-                <Link
-                  active={filter == VisibilityFilterModule.toString(visibilityFilter)}
-                  onClick={filterSelected}>
+        for (filter of FILTER_TITLES) {
+          <li>
+            <Link
+              onClick={(event : Html.Event) { setVisibilityFilter(filter) }}
+              active={filter == visibilityFilter}>
 
-                  <{ filter }>
+              <{ VisibilityFilterModule.toString(filter) }>
 
-                </Link>
-              </li>
-            },
-            filterTitles)
-        }>
+            </Link>
+          </li>
+        }
       </ul>
 
-      <If condition={completedCount > 0}>
+      if (completedCount > 0) {
         <button
           class="clear-completed"
           onClick={onClearCompleted}>
@@ -77,7 +61,7 @@ component Footer {
           "Clear completed"
 
         </button>
-      </If>
+      }
     </footer>
   }
 }

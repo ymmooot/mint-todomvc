@@ -7,23 +7,19 @@ component TodoItemComponent {
   state editing = false
 
   get listClasses : String {
-    Map.empty()
-    |> Map.set("completed", todo.completed)
-    |> Map.set("editing", editing)
-    |> Map.Extra.entries()
-    |> Array.select(
-      (t : Tuple(String, Bool)) : Bool {
-        case (t) {
-          {k, v} => v
-        }
-      })
-    |> Array.map(
-      (t : Tuple(String, Bool)) : String {
-        case (t) {
-          {k} => k
-        }
-      })
-    |> Array.Extra.join(" ")
+    try {
+      classMap =
+        Map.empty()
+        |> Map.set("completed", todo.completed)
+        |> Map.set("editing", editing)
+
+      for (name, active of classMap) {
+        name
+      } when {
+        active
+      }
+      |> String.join(" ")
+    }
   }
 
   fun handleDoubleClick {

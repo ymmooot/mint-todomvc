@@ -4,7 +4,7 @@ component MainSection {
 
   fun render : Html {
     <section className="main">
-      <If condition={todosCount > 0}>
+      if (todosCount > 0) {
         <span>
           <input
             class="toggle-all"
@@ -15,18 +15,18 @@ component MainSection {
 
           <label onClick={completeAllTodos}/>
         </span>
-      </If>
+      }
 
       <VisibleTodoList/>
 
-      <If condition={todosCount > 0}>
+      if (todosCount > 0) {
         <Footer
           completedCount={completedCount}
           activeCount={todosCount - completedCount}
           visibilityFilter={visibilityFilter}
           setVisibilityFilter={set}
           onClearCompleted={clearCompleted}/>
-      </If>
+      }
     </section>
   }
 }

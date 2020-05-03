@@ -6,31 +6,24 @@ component TodoTextInput {
 
   state value : String = text
 
-  fun componentDidMount : Promise(String, Void) {
-    `(() => {
-      this.base.focus()
-      this.base.onblur = #{handleBlur}
-    })()`
+  fun componentDidMount : Promise(Never, Void) {
+    Dom.focus(input)
   }
 
   get classes : String {
-    Map.empty()
-    |> Map.set("new-todo", isNewItem)
-    |> Map.set("edit", !isNewItem)
-    |> Map.Extra.entries()
-    |> Array.select(
-      (t : Tuple(String, Bool)) : Bool {
-        case (t) {
-          {k, v} => v
-        }
-      })
-    |> Array.map(
-      (t : Tuple(String, Bool)) : String {
-        case (t) {
-          {k} => k
-        }
-      })
-    |> Array.Extra.join(" ")
+    try {
+      classMap =
+        Map.empty()
+        |> Map.set("new-todo", isNewItem)
+        |> Map.set("edit", !isNewItem)
+
+      for (name, active of classMap) {
+        name
+      } when {
+        active
+      }
+      |> String.join(" ")
+    }
   }
 
   fun handleInput (event : Html.Event) : Promise(Never, Void) {
@@ -41,7 +34,7 @@ component TodoTextInput {
     case (event.which) {
       13 => submitValue()
       27 => clearValue()
-      => Promise.never()
+      => next {  }
     }
   }
 
@@ -49,7 +42,7 @@ component TodoTextInput {
     if (!isNewItem) {
       submitValue()
     } else {
-      Promise.never()
+      next {  }
     }
   }
 
@@ -65,12 +58,13 @@ component TodoTextInput {
   }
 
   fun render : Html {
-    <input
+    <input as input
       type="text"
       class={classes}
       placeholder={placeholder}
       onInput={handleInput}
       onKeyDown={handleKeyDown}
+      onBlur={handleBlur}
       value={value}/>
   }
 }
