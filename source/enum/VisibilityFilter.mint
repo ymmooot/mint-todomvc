@@ -15,10 +15,10 @@ module VisibilityFilterModule {
 
   fun fromString (item : String) : Maybe(VisibilityFilterEnum) {
     case (item) {
-      "All" => Maybe.just(VisibilityFilterEnum::ShowAll)
-      "Active" => Maybe.just(VisibilityFilterEnum::ShowActive)
-      "Completed" => Maybe.just(VisibilityFilterEnum::ShowCompleted)
-      => Maybe.nothing()
+      "All" => Maybe::Just(VisibilityFilterEnum::ShowAll)
+      "Active" => Maybe::Just(VisibilityFilterEnum::ShowActive)
+      "Completed" => Maybe::Just(VisibilityFilterEnum::ShowCompleted)
+      => Maybe::Nothing
     }
   }
 }
